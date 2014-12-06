@@ -22,16 +22,33 @@ sourceSets.test.groovy.srcDirs += ["src/test/java"]
 
 
 // Tested on: JVM: Java(TM) SE Runtime Environment (build 1.8.0-b132)
-// Okay when using 2.3.6 but not 2.3.7
+// Okay when using 2.3.6 but not beyond
 //def groovyVersion = '2.3.6'
-//def groovyVersion = '2.3.8'
-def groovyVersion = '2.4.0-SNAPSHOT'
+def groovyVersion = '2.3.7'
+//def groovyVersion = '2.4.0-SNAPSHOT'
 def spockVersion = "0.7-groovy-2.0"
 def junitVersion = '4.12'
 
 dependencies {
-  compile "org.codehaus.groovy:groovy-all:$groovyVersion"
-  testCompile "org.spockframework:spock-core:$spockVersion"
-  testCompile "junit:junit:$junitVersion"
+  compile 'org.codehaus.groovy:groovy-all:$groovyVersion'
+  testCompile 'org.spockframework:spock-core:$spockVersion'
+  testCompile 'junit:junit:$junitVersion'
 }
 
+// 2.3.6's parent: fef300ee19af2425232d2124fe0f3e7e2640f36c
+// 2.3.7's parent: 9849bdb92529bc460e23b565926f757638c0eb3c
+// Offending commit:
+/*
+commit bbcb2e9db5398d654e70a6d952b976ef335ce0d1
+
+Author: Cedric Champeau <cedric.champeau@gmail.com>
+Date:   Mon Sep 22 15:43:36 2014 +0200
+
+GROOVY-7063: IllegalAccessError when calling a protected method from a closure in a sub-class
+
+src/main/org/codehaus/groovy/classgen/asm/sc/StaticInvocationWriter.java             | 13 +++++++++++--
+  src/main/org/codehaus/groovy/transform/sc/StaticCompilationVisitor.java              |  6 ++++--
+src/main/org/codehaus/groovy/transform/stc/StaticTypeCheckingVisitor.java            | 20 ++++++++++++++++----
+src/test/org/codehaus/groovy/classgen/asm/sc/MethodCallsStaticCompilationTest.groovy | 27 +++++++++++++++++++++++++++
+  4 files changed, 58 insertions(+), 8 deletions(-)
+*/
