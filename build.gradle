@@ -1,0 +1,37 @@
+description = "Type Resolver NPE Bug"
+
+wrapper {
+  gradleVersion = '2.0'
+}
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://oss.jfrog.org/oss-snapshot-local"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs += ["src/main/java"]
+
+sourceSets.test.java.srcDirs = []
+sourceSets.test.groovy.srcDirs += ["src/test/java"]
+
+
+// Tested on: JVM: Java(TM) SE Runtime Environment (build 1.8.0-b132)
+// Okay when using 2.3.6 but not 2.3.7
+//def groovyVersion = '2.3.6'
+//def groovyVersion = '2.3.8'
+def groovyVersion = '2.4.0-SNAPSHOT'
+def spockVersion = "0.7-groovy-2.0"
+def junitVersion = '4.12'
+
+dependencies {
+  compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+  testCompile "org.spockframework:spock-core:$spockVersion"
+  testCompile "junit:junit:$junitVersion"
+}
+
