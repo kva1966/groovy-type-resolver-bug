@@ -30,9 +30,9 @@ def spockVersion = "0.7-groovy-2.0"
 def junitVersion = '4.12'
 
 dependencies {
-  compile 'org.codehaus.groovy:groovy-all:$groovyVersion'
-  testCompile 'org.spockframework:spock-core:$spockVersion'
-  testCompile 'junit:junit:$junitVersion'
+  compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+  testCompile "org.spockframework:spock-core:$spockVersion"
+  testCompile "junit:junit:$junitVersion"
 }
 
 // 2.3.6's parent: fef300ee19af2425232d2124fe0f3e7e2640f36c
